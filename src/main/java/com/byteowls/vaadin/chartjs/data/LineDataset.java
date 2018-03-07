@@ -5,7 +5,9 @@ import com.byteowls.vaadin.chartjs.utils.JUtils;
 import elemental.json.Json;
 import elemental.json.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +53,16 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     private Boolean showLine;
     private Boolean spanGaps;
     private Boolean steppedLine;
+
+    private List<TimeDoubleData> timeData;
+
+    public LineDataset addData(Date x, Double y) {
+    	if (timeData == null) {
+    		timeData = new ArrayList<>();
+    	}
+    	timeData.add(new TimeDoubleData().x(x).y(y));
+    	return this;
+    }
 
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts
@@ -311,7 +323,11 @@ public class LineDataset extends DoubleDataset<LineDataset> {
     public JsonObject buildJson() {
         JsonObject map = Json.createObject();
         JUtils.putNotNull(map, "type", type);
-        JUtils.putNotNullNumbers(map, "data", getData());
+        if (timeData != null) {
+        	JUtils.putNotNullBuilders(map, "data", timeData);
+        } else {
+        	JUtils.putNotNullNumbers(map, "data", getData());
+        }
         JUtils.putNotNull(map, "label", label);
         JUtils.putNotNull(map, "xAxisID", xAxisID);
         JUtils.putNotNull(map, "yAxisID", yAxisID);
