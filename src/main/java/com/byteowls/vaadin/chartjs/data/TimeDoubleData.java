@@ -14,10 +14,17 @@ import elemental.json.JsonObject;
 public class TimeDoubleData implements JsonBuilder, Serializable {
 
 	private static final long serialVersionUID = -1976874948565604978L;
-	private static final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	private Date x;
 	private Double y;
+
+	public TimeDoubleData() {
+	}
+
+	public TimeDoubleData(Date x, Double y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	/**
 	 * X Value
@@ -38,7 +45,7 @@ public class TimeDoubleData implements JsonBuilder, Serializable {
 	@Override
 	public JsonObject buildJson() {
 		JsonObject obj = Json.createObject();
-		JUtils.putNotNull(obj, "x", formatter.format(x));
+		JUtils.putNotNull(obj, "x", x);
 		JUtils.putNotNull(obj, "y", y);
 		return obj;
 	}

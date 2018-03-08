@@ -56,13 +56,21 @@ public class LineDataset extends DoubleDataset<LineDataset> {
 
     private List<TimeDoubleData> timeData;
 
+    /**
+     * Adds a time based data, this excludes any
+     * other kind of data.
+     */
     public LineDataset addData(Date x, Double y) {
     	if (timeData == null) {
     		timeData = new ArrayList<>();
     	}
-    	timeData.add(new TimeDoubleData().x(x).y(y));
+    	timeData.add(new TimeDoubleData(x, y));
     	return this;
     }
+
+	public List<TimeDoubleData> getTimeData() {
+		return timeData;
+	}
 
     /**
      * Used if the type of a dataset is needed. e.g. combo chart type charts

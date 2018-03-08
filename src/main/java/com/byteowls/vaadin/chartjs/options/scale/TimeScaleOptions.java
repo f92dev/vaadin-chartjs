@@ -130,10 +130,10 @@ public class TimeScaleOptions extends And<TimeScale> implements JsonBuilder {
         JUtils.putNotNull(map, "displayFormats", displayFormats);
         JUtils.putNotNull(map, "isoWeekday", isoWeekday);
         if (min != null) {
-            JUtils.putNotNull(map, "min", new DateSerializer().serialize(min, null));
+            JUtils.putNotNull(map, "min", min);
         }
         if (max != null) {
-            JUtils.putNotNull(map, "max",  new DateSerializer().serialize(max, null));
+            JUtils.putNotNull(map, "max",  max);
         }
         if (this.round != null) {
             JUtils.putNotNull(map, "round", round.toString().toLowerCase());

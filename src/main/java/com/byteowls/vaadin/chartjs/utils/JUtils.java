@@ -6,10 +6,15 @@ import elemental.json.JsonObject;
 import elemental.json.JsonValue;
 import elemental.json.impl.JreJsonNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public abstract class JUtils {
+
+	private static final DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public static void putNotNull(JsonObject obj, String key, Map<String, String> map) {
         if (map != null) {
@@ -59,6 +64,12 @@ public abstract class JUtils {
     public static void putNotNull(JsonObject obj, String key, Integer value) {
         if (value != null) {
             obj.put(key, value.doubleValue());
+        }
+    }
+
+    public static void putNotNull(JsonObject obj, String key, Date value) {
+        if (value != null) {
+            obj.put(key, formatter.format(value));
         }
     }
 
